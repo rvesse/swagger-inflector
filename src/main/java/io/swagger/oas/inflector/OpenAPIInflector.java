@@ -113,9 +113,15 @@ public class OpenAPIInflector extends ResourceConfig {
 
     protected void init(Configuration configuration) {
         config = configuration;
+        //TODO check config option to determine which parser option to use
+        Configuration.ParserOption configOptions = config.getParserOptions();
         ParseOptions options = new ParseOptions();
-        options.setResolve(true);
-        options.setResolveFully(true);
+        if (configOptions.getName().equals("resolve")){
+            options.setResolve(true);
+        }
+        if (configOptions.getName().equals("resolveFully")){
+            options.setResolveFully(true);
+        }
         SwaggerParseResult swaggerParseResult = new OpenAPIV3Parser().readLocation(config.getSwaggerUrl(), null, options);
         OpenAPI openAPI = swaggerParseResult.getOpenAPI();
 

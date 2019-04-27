@@ -22,6 +22,9 @@ entityProcessors:
 exampleProcessors:
   - sequence
 
+#Allows to configure parser options
+parserOptions: resolveFully
+
 # loads all by default, or pick and choose
 inputValidators:
   - requiredFieldValidator

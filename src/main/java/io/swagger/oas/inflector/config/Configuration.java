@@ -46,6 +46,7 @@ public class Configuration {
     private String swaggerUrl;
     private List<String> swaggerProcessors = new ArrayList<>();
     private List<String> exampleProcessors = new ArrayList<>();
+    private ParserOption parserOptions;
     private String filterClass;
     private int invalidRequestCode = 400;
     private String rootPath = "";
@@ -70,6 +71,31 @@ public class Configuration {
             }
         }
         return swaggerBase;
+    }
+
+    public ParserOption getParserOptions() {
+        return parserOptions;
+    }
+
+    public void setParserOptions(ParserOption parserOptions) {
+        this.parserOptions = parserOptions;
+    }
+
+    public static enum ParserOption {
+        RESOLVE_FULLY(1, "resolveFully"), RESOLVE(2, "resolve"), FLATTEN(3, "flatten"), RESOLVE_COMBINATOR(4, "resolveCombinators");
+
+        private Integer id;
+        private String name;
+
+        private ParserOption(final Integer id, final String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @JsonValue
+        public String getName() {
+            return name;
+        }
     }
 
     public static enum Environment {
