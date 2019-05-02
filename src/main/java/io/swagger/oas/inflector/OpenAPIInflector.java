@@ -113,17 +113,13 @@ public class OpenAPIInflector extends ResourceConfig {
 
     protected void init(Configuration configuration) {
         config = configuration;
-        //TODO check config option to determine which parser option to use
-        Configuration.ParserOption configOptions = config.getParserOptions();
         ParseOptions options = new ParseOptions();
-        if (configOptions.getName().equals("resolve")){
-            options.setResolve(true);
-        }
-        if (configOptions.getName().equals("resolveFully")){
-            options.setResolveFully(true);
-        }
+        options.setResolve(true);
+        options.setResolveFully(true);
         SwaggerParseResult swaggerParseResult = new OpenAPIV3Parser().readLocation(config.getSwaggerUrl(), null, options);
         OpenAPI openAPI = swaggerParseResult.getOpenAPI();
+
+        OpenAPI exposedAPI = getExposedAPI(config);
 
         if(!config.getValidatePayloads().isEmpty()) {
             LOGGER.info("resolving openAPI");
@@ -234,7 +230,7 @@ public class OpenAPIInflector extends ResourceConfig {
                             ContextResolver.class);
                 }
                 enableProcessor(JacksonProcessor.class, MediaType.APPLICATION_JSON_TYPE);
-                enableSwaggerJSON(openAPI, configuration.getSwaggerProcessors());
+                enableSwaggerJSON(exposedAPI, configuration.getSwaggerProcessors());
             } else if ("xml".equalsIgnoreCase(item)) {
                 // XML
                 if (!isRegistered(DefaultContentTypeProvider.class)) {
@@ -249,7 +245,7 @@ public class OpenAPIInflector extends ResourceConfig {
                 Yaml.mapper().registerModule(simpleModule);
                 register(YamlExampleProvider.class);
                 enableProcessor(JacksonProcessor.class, JacksonProcessor.APPLICATION_YAML_TYPE);
-                enableSwaggerYAML(openAPI, configuration.getSwaggerProcessors());
+                enableSwaggerYAML(exposedAPI, configuration.getSwaggerProcessors());
             }else if ("plain".equalsIgnoreCase(item)) {
                 // PLAIN
                 register(PlainExampleProvider.class);
@@ -370,6 +366,31 @@ public class OpenAPIInflector extends ResourceConfig {
                 throw new RuntimeException("Unable to start due to unimplemented methods");
             }
         }
+    }
+
+    private OpenAPI getExposedAPI(Configuration config) {
+        Configuration.ParserOption configOptions = config.getParserOptions();
+        ParseOptions opts = new ParseOptions();
+
+        if (configOptions.getName().equals("original")){
+            opts.setResolve(false);
+        }
+        if (configOptions.getName().equals("resolve")){
+            opts.setResolve(true);
+        }
+        if (configOptions.getName().equals("resolveFully")){
+            opts.setResolveFully(true);
+        }
+        if (configOptions.getName().equals("flatten")){
+            opts.setFlatten(true);
+        }
+        if (configOptions.getName().equals("resolveCombinators")){
+            opts.setResolveCombinators(true);
+        }
+
+        SwaggerParseResult exposedSwaggerParseResult = new OpenAPIV3Parser().readLocation(config.getSwaggerUrl(), null, opts);
+        OpenAPI exposedAPI = exposedSwaggerParseResult.getOpenAPI();
+        return exposedAPI;
     }
 
     public static String basePath(String basePath, String path) {

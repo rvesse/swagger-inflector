@@ -82,7 +82,7 @@ public class Configuration {
     }
 
     public static enum ParserOption {
-        RESOLVE_FULLY(1, "resolveFully"), RESOLVE(2, "resolve"), FLATTEN(3, "flatten"), RESOLVE_COMBINATOR(4, "resolveCombinators");
+        RESOLVE_FULLY(1, "resolveFully"), RESOLVE(2, "resolve"), FLATTEN(3, "flatten"), RESOLVE_COMBINATOR(4, "resolveCombinators"), ORIGINAL(5, "original");
 
         private Integer id;
         private String name;

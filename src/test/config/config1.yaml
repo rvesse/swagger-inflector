@@ -23,7 +23,7 @@ exampleProcessors:
   - sequence
 
 #Allows to configure parser options
-parserOptions: resolveFully
+parserOptions: original
 
 # loads all by default, or pick and choose
 inputValidators:
@@ -31,7 +31,7 @@ inputValidators:
   - numericValidator
   - stringValidator
 
-# loads all by default, or pick and choose
+# loads all by default, or pick and choose``l ,,,.
 inputConverters:
   - io.swagger.oas.sample.converters.SampleConverter
   - defaultConverter
