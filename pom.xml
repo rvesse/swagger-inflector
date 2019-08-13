@@ -22,37 +22,24 @@
         <version>5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.swagger</groupId>
+    <groupId>com.github.rvesse</groupId>
     <artifactId>swagger-inflector</artifactId>
     <packaging>jar</packaging>
     <name>swagger-inflector</name>
-    <version>2.0.0-SNAPSHOT</version>
-    <url>https://github.com/swagger-api/swagger-inflector</url>
+    <version>2.0.1-SNAPSHOT</version>
+    <url>https://github.com/rvesse/swagger-inflector</url>
     <scm>
-        <connection>scm:git:git@github.com:swagger-api/swagger-inflector.git</connection>
-        <developerConnection>scm:git:git@github.com:swagger-api/swagger-inflector.git</developerConnection>
-        <url>https://github.com/swagger-api/swagger-inflector</url>
+        <connection>scm:git:git@github.com:rvesse/swagger-inflector.git</connection>
+        <developerConnection>scm:git:git@github.com:rvesse/swagger-inflector.git</developerConnection>
+        <url>https://github.com/rvesse/swagger-inflector</url>
     </scm>
     <prerequisites>
         <maven>2.2.0</maven>
     </prerequisites>
-    <developers>
-        <developer>
-            <id>fehguy</id>
-            <name>Tony Tam</name>
-            <email>fehguy@gmail.com</email>
-        </developer>
-    </developers>
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/swagger-api/swagger-inflector/issues</url>
+        <url>https://github.com/rvesse/swagger-inflector/issues</url>
     </issueManagement>
-    <mailingLists>
-        <mailingList>
-            <name>swagger-swaggersocket</name>
-            <archive>https://groups.google.com/forum/#!forum/swagger-swaggersocket</archive>
-        </mailingList>
-    </mailingLists>
     <licenses>
         <license>
             <name>Apache License 2.0</name>
